@@ -64,9 +64,9 @@ export class ButtonRadioActiveComponent implements OnInit {
     } else {
       this.agrupacion = this.groupButton;
     }
-    console.log('Botones PanelButtons: ');
+    /*console.log('Botones PanelButtons: ');
     console.log(this.agrupacion);
-    console.log('Filtro botones PanelButtons: ' + this.filtrado);
+    console.log('Filtro botones PanelButtons: ' + this.filtrado);*/
 
   }
 

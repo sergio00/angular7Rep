@@ -138,7 +138,7 @@ export class HeaderComponent {
         });
       }
     }
-    console.log(this.templateLazy);
+    //console.log(this.templateLazy);
   }
 
   private createComponentFactory(element: tabTemplate): Promise<void> {
@@ -212,7 +212,7 @@ export class HeaderComponent {
   }
 
   closeDynamicTab(tab: tabClass) {
-    console.log(tab);
+    //console.log(tab);
     var localtemplateCol: tabTemplate[] = [];
     for (let i = 0; i < this.queryListComponent.length; i++) {
       if (this.queryListComponent[i] === tab) {
@@ -230,9 +230,9 @@ export class HeaderComponent {
         });
       }
 
-      console.log('----------------------------------')
+      /*console.log('----------------------------------')
       console.log(this.collection);
-      console.log(localtemplateCol);
+      console.log(localtemplateCol);*/
       if (localtemplateCol.length > 0) {
         this.setCollectionVisibleItems(localtemplateCol[0]);
       } else {

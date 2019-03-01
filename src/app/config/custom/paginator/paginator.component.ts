@@ -168,11 +168,10 @@ export class PaginatorComponent implements OnInit {
       //alert("response: " + result);
       //console.log(result);
       if(result){
-        console.log('cOKOKOKOK');
+        //console.log('cOKOKOKOK');
         this.indexQuery = this.indexQuery+1;
         this.resultQuery = this.reloadData;
         this.paginator.pageIndex = 0;
-        //this.maxLimit = this.maxLimit+this.maxLimit;
         this.loadData();
       }
     });

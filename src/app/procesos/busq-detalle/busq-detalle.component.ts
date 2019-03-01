@@ -143,7 +143,7 @@ export class BusqDetalleComponent implements OnInit {
     const modalRef = modal.v1.open(ModalDetalleComponent);
     modalRef.componentInstance.title = 'About';
     modalRef.result.then(
-      res => { console.log("Resulatdo Modal:" + res) }
+      res => { /*console.log("Resulatdo Modal:" + res)*/ }
     ).catch(
       resultado => {
         console.log("Cerro Manual:" + resultado);
@@ -164,9 +164,9 @@ export class BusqDetalleComponent implements OnInit {
 
     confirmDialog.v1.confirm('Pregunta', 'Esta seguro de eliminar el registro.?')
       .then(
-        (confirmed) => console.log('Opcion Seleccionada:', confirmed)
+        (confirmed) => console.log('Opcion:', confirmed)
       )
-      .catch(() => console.log('Cancelo la Ventana de Pregunta'));
+      .catch(() => console.log('Cancelo la Ventana'));
   }
 
 

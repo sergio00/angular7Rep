@@ -48,9 +48,9 @@ export class CcButtonsComponent implements OnInit {
     }else{
       this.agrupacion = this.grupoBotones;
     }
-    console.log('Botones CCButons: ');
+    /*console.log('Botones CCButons: ');
     console.log(this.agrupacion);
-    console.log('Filtro botones CCButons: ' + this.filtrado);
+    console.log('Filtro botones CCButons: ' + this.filtrado);*/
 
   }
 

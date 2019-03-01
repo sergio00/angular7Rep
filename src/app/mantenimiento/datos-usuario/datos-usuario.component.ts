@@ -31,8 +31,8 @@ export class DatosUsuarioComponent implements OnInit {
   }
   
   refreshData(list:any){
-    console.log('update data:');
-    console.log(list);
+    //console.log('update data:');
+    //console.log(list);
     this.dataSource1 = new MatTableDataSource(list.dataupdate);
     this.dataSource1.paginator = list.paginador;
     this.setLenght = list.length;
