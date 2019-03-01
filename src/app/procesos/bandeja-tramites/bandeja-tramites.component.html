@@ -1,0 +1,41 @@
+<h1>
+  Bienvenido a la Bandeja de Tramites
+</h1>
+<div class="contenido">
+<table mat-table [dataSource]="tramites"  class="mat-elevation-z8">
+    
+     <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id. </th>
+        <td mat-cell *matCellDef="let tramites"> 
+          {{tramites.id}} 
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nombres">
+          <th mat-header-cell *matHeaderCellDef> Nombres </th>
+          <td mat-cell *matCellDef="let tramites"> 
+            {{tramites.nombres}} 
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef>Fecha </th>
+            <td mat-cell *matCellDef="let tramites"> 
+              {{tramites.fecha}} 
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Acciones </th>
+              <td mat-cell *matCellDef="let tramites"> 
+                  <button (click)="consultar()">Detalle</button>
+              </td>
+          </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let tramites; columns: displayedColumns;">
+  </tr>
+
+</table>
+<cc-spiner-procesar></cc-spiner-procesar>
+
+</div>  
+

@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-header {{style}}" >
+    <table width="100%">
+      <tr>
+        <td align="left">
+          <div class="card-title {{styleTitle}} title_h5" align="left">{{title}}</div>
+        </td>
+        <td align="right">
+          <div class="btn-group" >
+            <div *ngFor="let item of agrupacion | filterByOrigin: filtrado" class="btn {{item.clase}} btn-xs button_margin" ngbTooltip="{{item.boton.texto}}"
+              [class.isDisabled]="!item.permiso" [hidden]="!item.showimg" (click)="item.accion(item.paramAccion)">
+              <span *ngIf="item.showimg" class="panding_span {{item.boton.icon}}"></span>
+              <span *ngIf="item.showbadge" class="panding_span badge badge-light">{{item.pDatoBagde}}</span>
+              <span *ngIf="item.showtxt">{{item.boton.texto}}</span>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div align="center" class="card-body">
+    <ng-content></ng-content>
+  </div>
+</div>

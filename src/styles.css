@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+/*@import url('https://fonts.googleapis.com/icon?family=Material+Icons'); */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* fallback */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+   src: url(https://fonts.gstatic.com/s/materialicons/v42/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+  }
+
+ .contenido {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.mat-table.mat-row {
+        cursor: pointer;
+}
+table {
+    width: 100%;
+  }
+
+  .btn-xs + .dropdown-toggle-split, .btn-group-xs > .btn + .dropdown-toggle-split {
+    padding-right: 0.187rem;
+    padding-left: 0.187rem;
+  }
+  
+  .btn-xs, .btn-group-xs > .btn {
+    padding: 0.12rem 0.25rem;
+    font-size: 0.720rem;
+    line-height: 1.5;
+    border-radius: 0.1rem;
+  }

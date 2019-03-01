@@ -1,0 +1,45 @@
+.angular-logo {
+    margin: 0 4px 3px 0;
+    height: 35px;
+    vertical-align: middle;
+}
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.tab-close {
+    margin-left: 0.15em;
+    color: #124048; 
+    text-align: right;
+    cursor: pointer;
+}
+.nav-link.active .tab-close{
+    color: #01d3f7; 
+    text-align: right;
+    cursor: pointer;
+}
+
+.customer_navs{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.customer_navs .nav-link:hover{
+    background-color:#ababab;
+}
+
+.customer_navs .nav-link.active, .nav-pills .show>.nav-link{
+    color: #fff;
+    background-color: #337ab7;
+}
+
+.customer_routing{
+    margin-bottom: 0px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+}
+
+    

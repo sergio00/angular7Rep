@@ -1,0 +1,28 @@
+.disabled {
+    cursor: not-allowed;
+  }
+
+  .card-header {
+    padding: 0.15rem 0.50rem;
+}
+
+.title_h5{
+  margin-bottom: 0rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    color: inherit;
+    font-size: 1.10rem;
+}
+
+.panding_span{
+  padding-right: 0.15em;
+}
+.button_margin{
+  margin-left: 0.02rem  !important;
+  border-radius: 0.25rem !important;
+  border-top-left-radius: 0.25rem !important;
+  border-top-right-radius: 0.25rem !important;
+  border-bottom-right-radius: 0.25rem !important;
+  border-bottom-left-radius: 0.25rem !important;
+}

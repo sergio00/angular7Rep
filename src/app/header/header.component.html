@@ -1,0 +1,37 @@
+<mat-toolbar color="primary">
+  <span>
+    <img src="assets/img/angular_whiteTransparent.svg" class="angular-logo">
+Menu Principal
+  </span>
+  <span class="fill-remaining-space"></span>
+  <button mat-button (click)="loadADynamic('Detalle Tramite')">Procesos</button>
+  <button mat-button (click)="loadADynamic('Mantenimiento')">Mantenimientos</button>
+  <button mat-button (click)="reportes()">Reportes</button>
+  <button mat-button (click)="loadADynamic('Detalle Busqueda')">ConsultasDetalleTramites</button>
+  
+  <button mat-button (click)="onLogout()">Logout</button>
+</mat-toolbar>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-9" >
+      <ul class="nav nav-pills customer_navs small">
+        <!-- dynamic tabs  -->
+        <li *ngFor="let tab of queryListComponent" class="nav-item" (click)="selectDynamicTab(tab)">
+          <a href="#" class="nav-link show active" [class.active]="tab.active">{{tab.name}} <span class="tab-close"
+              *ngIf="tab.isCloseable" (click)="closeDynamicTab(tab)">x</span></a>
+      </ul>
+    </div>
+    <div class="col-sm-3" >
+      <ngb-alert type="info" class="customer_routing small" [dismissible]="false">
+       <div >
+        <strong>{{routerMessage}}</strong>
+       </div>
+      </ngb-alert>
+    </div>
+  </div>
+</div>
+<mat-divider></mat-divider>
+<div id="containerAll" >
+  <ng-template #containerAll></ng-template>
+</div>

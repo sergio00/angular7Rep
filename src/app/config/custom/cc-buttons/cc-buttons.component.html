@@ -1,0 +1,26 @@
+
+<div *ngIf="agrupacion.length>0">
+  <div class="btn-group">
+    <div  *ngFor="let item of agrupacion | filterByOrigin: filtrado" class="btn {{item.clase}} btn-xs button_margin" [class.disabled]="!item.permiso" [hidden]="!item.showimg"
+    ngbTooltip="{{item.boton.texto}}" placement="top"
+    (click)="item.accion(item.paramAccion)" >
+      <span *ngIf="item.showimg" class="panding_span {{item.boton.icon}}"></span>
+      <span *ngIf="item.showbadge" class="panding_span badge badge-light">{{item.pDatoBagde}}</span>
+      <span *ngIf="item.showtxt">{{item.boton.texto}}</span>
+    </div>
+  </div>
+</div>
+
+  <!--
+
+<div ng-if="arr.length>0"><div class="btn-group" >'+ 
+ 	'<div ng-repeat="b in ::arr | filterByOrig:pfilterbtns track by $index" '+
+ 		'class="btn {{b.clase || \'btn-primary\'}}  ng-class:{ \'disabled\': !b.permiso }" '+
+ 		'ng-click="!b.permiso || b.accion(b.paramAccion)" uib-tooltip="{{::b.cbtn.texto}}" tooltip-placement="top" >'+
+ 	'<span ng-if="b.showimg" class="{{::b.cbtn.icon}}"></span> '+
+ 	'<span ng-if="b.showbadge" class="badge">{{::b.pDatoBagde}}</span> '+
+ 	'<span ng-if="b.showtxt">{{::b.cbtn.texto}}</span></div>'+
+ 	'</div></div>'+
+    '<div ng-if="arr!=null && arr.length==0"><input name="rdoRow" type="radio" ng-click="prdoevt()" class="form-control" ></div>
+
+-->

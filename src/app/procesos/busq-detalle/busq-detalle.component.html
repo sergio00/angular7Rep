@@ -1,0 +1,49 @@
+<h1>Detalle Tramites</h1>
+
+<!--
+    <button (click)="openConfirmationDialog()" type="button" class="btn btn-primary">Pregunta Modal Servicio</button>
+<button (click)="openModal()" type="button" class="btn btn-primary">Componente Modal</button>
+<cc-modal title="Pruebas" btnCancelText="Cancelar"  btnOkText="Aceptar"  idModal="ModaldePruebas">Contenido del Modal  <button (click)="alerta()" > Alerta </button>   </cc-modal>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModaldePruebas">
+    Open modal  Data-target
+</button>
+
+<button type="button" class="btn btn-primary" (click)="abrirModalJquery()">
+    Open modal Jquery
+</button>
+
+<button (click)="regresar()" class="btn btn-primary" >Regresar</button>
+
+
+-->
+<app-cc-panel title="Panel CC-Buttons 1" cstyle="bg-info text-white" pparam="left"  >
+
+    <app-cc-buttons [grupoBotones]="grupoMantenimiento1" filtroBotones="aprobarRegla4" ></app-cc-buttons>
+
+
+</app-cc-panel>
+
+<div  class="container">
+    <app-cc-panel title="hola" cstyle="bg-info text-white" pparam="left"  >Contenido del Panel</app-cc-panel>
+</div>
+<app-cc-panel-group title="Detalle de Grupo">
+    <app-cc-panel>Detalle 1</app-cc-panel>
+    <app-cc-panel>Detalle 2</app-cc-panel>
+</app-cc-panel-group>
+<input type="text" [cdClik]="alerta" >
+
+
+
+<app-cc-panel title="Panel CC-Buttons" cstyle="bg-info text-white" pparam="left"  >
+
+    <app-cc-buttons [grupoBotones]="grupoMantenimiento1"   parametros="'subGrupo1'"></app-cc-buttons>
+
+
+</app-cc-panel>
+
+<app-button-radio-active title="Panel CC-PANEL-Buttons" [groupButton]="grupoMantenimiento1" filtroBoton="aprobarRegla3">123</app-button-radio-active>
+
+<app-cc-panel-collapse pcolapse="collapse1" title="" [groupButton]="grupoMantenimiento1" filtroBoton="aprobarRegla" pparams="'fPC'">1 tabla</app-cc-panel-collapse>
+
+

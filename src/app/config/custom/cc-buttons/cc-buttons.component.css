@@ -1,0 +1,21 @@
+.disabled {
+    cursor: not-allowed;
+  }
+  .panding_span{
+    padding-right: 0.30rem;
+  }
+  .button_margin{
+    margin-left: 0.05rem  !important;
+    border-radius: 0.25rem !important;
+    border-top-left-radius: 0.25rem !important;
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+    border-bottom-left-radius: 0.25rem !important;
+  }
+/* .btn-xs, .btn-group-xs > .btn {
+  padding: 0.12rem 0.25rem;
+  font-size: 0.438rem;
+  line-height: 1.5;
+  border-radius: 0.1rem;
+}
+*/

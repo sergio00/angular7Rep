@@ -1,0 +1,71 @@
+<div class="card">
+  <div class="card-header {{style}}">
+    <table width="100%" style="padding-left: 5px;">
+      <tbody>
+        <tr>
+          <td align="left">
+            <a (click)="isCollapsed = !isCollapsed" > <span class="{{styleTitle}} title_h5"> {{title}}</span>
+              &nbsp;<span style="color:#000000" class="card-title">{{title2}}</span>
+            </a>
+          </td>
+          <td align="right">
+            <div class="btn-group">
+              <div *ngFor="let item of agrupacion | filterByOrigin: filtro " class="btn {{item.clase}} btn-xs button_margin"
+                [class.isDisabled]="item.permiso" [hidden]="!item.showimg" ngbTooltip="{{item.boton.texto}}"
+                (click)="item.accion(item.paramAccion)" >
+                <span *ngIf="item.showimg" class="panding_span {{item.boton.icon}}"></span>
+                <span *ngIf="item.showbadge" class="panding_span badge badge-light">{{item.pDatoBagde}}</span>
+                <span *ngIf="item.showtxt">{{item.boton.texto}}  </span>
+              </div>
+            </div>
+            <div class="btn-group">
+              <span class="btn btn-primary btn-xs button_margin" (click)="isCollapsed = !isCollapsed">
+                <span class="fa fa-angle-down"></span>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--  [@expandCollapse]="isCollapsed ? 'closed' : 'open'" -->
+  <div id="collapseExample" [ngbCollapse]="isCollapsed" >
+    <div class="card">
+      <div class="card-body">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+<ngb-accordion #acc="ngbAccordion">
+    <ngb-panel id="toggle-1" title="First panel">
+      <ng-template ngbPanelContent>
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
+        aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+        sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
+        craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+        labore sustainable VHS.
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel id="toggle-2" title="Second">
+      <ng-template ngbPanelContent>
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
+        aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+        sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
+        craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+        labore sustainable VHS.
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+  
+  <hr/>
+  
+  <button class="btn btn-sm btn-outline-primary mr-2" (click)="acc.toggle('toggle-1')">Toggle first</button>
+  <button class="btn btn-sm btn-outline-primary mr-2" (click)="acc.toggle('toggle-2')">Toggle second</button>
+
+
+-->
