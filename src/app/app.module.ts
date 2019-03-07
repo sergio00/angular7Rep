@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppMaterialModule } from './config/app-material/app-material.module';
 import { DynamicComponentsService } from './dynamic-components.service';
+import { SharedDataComponentService } from './header/shared-data-component.service';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,7 @@ import { DynamicComponentsService } from './dynamic-components.service';
     LoginLayoutComponent,
     HomeLayoutComponent,
     LoginComponent,
-    HeaderComponent   
-    
+    HeaderComponent    
   ],
   imports: [
     BrowserModule,
@@ -45,7 +45,7 @@ import { DynamicComponentsService } from './dynamic-components.service';
 
   providers: [
     {provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader},
-    AuthService,DynamicComponentsService,
+    AuthService,DynamicComponentsService,SharedDataComponentService,
     AuthGuard,NgbModal],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

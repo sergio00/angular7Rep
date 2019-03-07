@@ -66,9 +66,6 @@ export class CcPanelCollapseComponent {
     } else {
       this.agrupacion = this.groupButton;
     }
-    /*console.log('BotonesColapse: ');
-    console.log(this.agrupacion);
-    console.log('Filtro botonesColapse: ' + this.filtro);*/
   }
 
 

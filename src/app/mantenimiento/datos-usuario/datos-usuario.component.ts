@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ComponentSelectors } from 'src/app/component-selectors';
 import { MatTableDataSource } from '@angular/material';
 import { GithubIssue } from 'src/app/config/table-service/tabla.service';
 import { PaginatorComponent } from 'src/app/config/custom/paginator/paginator.component';
+import { SharedDataComponentService } from 'src/app/header/shared-data-component.service';
 
 @Component({
   selector: ComponentSelectors.ManteComponent,
@@ -16,11 +17,13 @@ export class DatosUsuarioComponent implements OnInit {
   setPageSize:number=10;
   setShowVisible:boolean=true;
   setConsulta='';
+  @Input() dataInput:any;
+  title:string=''; 
 
   @ViewChild(PaginatorComponent) paginatorComponent: PaginatorComponent;
 
 
-  constructor() { 
+  constructor(private shareData:SharedDataComponentService) { 
     this.setLenght=20;
     this.setPageSize=10;
     this.setShowVisible=true;
@@ -28,11 +31,17 @@ export class DatosUsuarioComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.title = this.dataInput.name;
+    console.log(this.dataInput.name);
+  }
+
+  closeComponentTab(){
+    this.shareData.callCloseComponent(this.title);
   }
   
   refreshData(list:any){
-    //console.log('update data:');
-    //console.log(list);
+    console.log('update data:');
+    console.log(list);
     this.dataSource1 = new MatTableDataSource(list.dataupdate);
     this.dataSource1.paginator = list.paginador;
     this.setLenght = list.length;

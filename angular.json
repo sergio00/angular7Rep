@@ -34,7 +34,8 @@
             ],
             "lazyModules": [
               "src/app/mantenimiento/mantenimiento.module",
-              "src/app/procesos/acn.module"
+              "src/app/procesos/acn.module",
+              "src/app/header/dashboard-component/dashboard-component.module"
             ]
           },
           "configurations": {

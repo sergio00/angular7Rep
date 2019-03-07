@@ -1,0 +1,24 @@
+<div class="gridMenuLayout">
+  <mat-grid-list cols="2" rowHeight="3em">
+    <mat-grid-tile>
+      <button mat-menu-item (click)="setTabActive('Detalle Tramite')">
+        <span>Detalle Tramite</span>
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <button mat-menu-item (click)="setTabActive('Mantenimiento')">
+        <span>Mantenimiento</span>
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <button mat-menu-item (click)="setTabActive('Detalle Busqueda')">
+            <span>Detalle Busqueda</span>
+          </button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+          <button mat-menu-item (click)="reportes()">
+              <span>Reportes</span>
+            </button>
+        </mat-grid-tile>
+  </mat-grid-list>
+</div>

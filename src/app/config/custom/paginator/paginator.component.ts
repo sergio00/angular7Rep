@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, AfterViewInit, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, Output, EventEmitter, OnInit } from '@angular/core';
 import { MatPaginator, MatSort, MatDialogConfig, MatDialog } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { merge, Observable } from 'rxjs';
@@ -24,7 +24,6 @@ export class PaginatorComponent implements OnInit {
 
   exampleDatabase: TablaService | null;
   manualPage = null;
-  observacion: Observable<any>;
   resultQuery: number;
   display = false;
 
@@ -116,7 +115,7 @@ export class PaginatorComponent implements OnInit {
             this.display = false;
 
             if (this.paginator._nextButtonsDisabled()) {
-              console.log('No habilitado');
+              //console.log('No habilitado');
               if ((this.paginator.getNumberOfPages() * this.paginator.pageSize) < this.maxLimit) {
                 if (this.resultQuery <= this.maxLimit) {
                   this.resultQuery = this.resultQuery + this.reloadData;
@@ -146,7 +145,7 @@ export class PaginatorComponent implements OnInit {
           
         }, error => {
           this.display = false;
-          console.log('Could not load todos.' + error);
+          //console.log('Could not load todos.' + error);
           alert('Datos No disponibles')
         });
     }, 0);
@@ -172,6 +171,7 @@ export class PaginatorComponent implements OnInit {
         this.indexQuery = this.indexQuery+1;
         this.resultQuery = this.reloadData;
         this.paginator.pageIndex = 0;
+        //this.maxLimit = this.maxLimit+this.maxLimit;
         this.loadData();
       }
     });

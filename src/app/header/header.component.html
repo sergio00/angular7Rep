@@ -1,20 +1,33 @@
 <mat-toolbar color="primary">
-  <span>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span (click)="loadADynamic('Dashboard')">
     <img src="assets/img/angular_whiteTransparent.svg" class="angular-logo">
-Menu Principal
+    Menu Principal
   </span>
   <span class="fill-remaining-space"></span>
-  <button mat-button (click)="loadADynamic('Detalle Tramite')">Procesos</button>
-  <button mat-button (click)="loadADynamic('Mantenimiento')">Mantenimientos</button>
-  <button mat-button (click)="reportes()">Reportes</button>
-  <button mat-button (click)="loadADynamic('Detalle Busqueda')">ConsultasDetalleTramites</button>
-  
   <button mat-button (click)="onLogout()">Logout</button>
 </mat-toolbar>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="loadADynamic('Detalle Tramite')">
+    <span>Detalle Tramite</span>
+  </button>
+  <button mat-menu-item (click)="loadADynamic('Mantenimiento')">
+    <span>Mantenimiento</span>
+  </button>
+  <button mat-menu-item (click)="loadADynamic('Detalle Busqueda')">
+    <span>Detalle Busqueda</span>
+  </button>
+  <button mat-menu-item (click)="reportes()">
+    <span>Reportes</span>
+  </button>
+</mat-menu>
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-9" >
+    <div class="col-sm-9">
       <ul class="nav nav-pills customer_navs small">
         <!-- dynamic tabs  -->
         <li *ngFor="let tab of queryListComponent" class="nav-item" (click)="selectDynamicTab(tab)">
@@ -22,16 +35,16 @@ Menu Principal
               *ngIf="tab.isCloseable" (click)="closeDynamicTab(tab)">x</span></a>
       </ul>
     </div>
-    <div class="col-sm-3" >
+    <div class="col-sm-3">
       <ngb-alert type="info" class="customer_routing small" [dismissible]="false">
-       <div >
-        <strong>{{routerMessage}}</strong>
-       </div>
+        <div>
+          <strong>{{routerMessage}}</strong>
+        </div>
       </ngb-alert>
     </div>
   </div>
 </div>
 <mat-divider></mat-divider>
-<div id="containerAll" >
+<div id="containerAll">
   <ng-template #containerAll></ng-template>
 </div>

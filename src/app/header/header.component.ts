@@ -1,8 +1,9 @@
 import { Router } from '@angular/router';
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, OnInit, OnChanges } from '@angular/core';
 import { AuthService } from './../auth/auth.service';
 import { DynamicComponentsService } from '../dynamic-components.service';
 import { ComponentSelectors } from '../component-selectors';
+import { SharedDataComponentService } from './shared-data-component.service';
 
 export interface tabClass {
   name?: string,
@@ -11,63 +12,87 @@ export interface tabClass {
   isCloseable?: any
 }
 
-interface tabTemplate {
+export interface tabTemplate {
   selector?: any,
   hiddenValue?: any,
   selectorName?: any,
   position?: any,
-  modulePath?: any
+  modulePath?: any,
+  haveParams?: any
 }
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls:['./header.component.css']
+  styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   @ViewChild('containerAll', { read: ViewContainerRef }) containerTemplate: ViewContainerRef;
   queryListComponent: tabClass[] = [];
   collection: HTMLCollection;
   templateLazy: tabTemplate[] = [];
   routerMessage: string = 'Home';
-  
+  selectorNameC: string;
+  dataInput: any;
 
   constructor(private authService: AuthService,
-              private router: Router,private dynamicComponentSvc: DynamicComponentsService) {
-      this.resetTemplateFactory();
-   }
+    private shareData: SharedDataComponentService, private dynamicComponentSvc: DynamicComponentsService) {
+    this.resetTemplateFactory();
+    this.shareData.componentMethodCalled$.subscribe((data) => {
+      console.log(data.datos);
+      this.selectorNameC = data.title ;
+      this.dataInput=data.datos;
+      this.loadADynamic(this.selectorNameC);
+    });
+    this.shareData.componentMethodCalled2$.subscribe((data) => {
+      this.closeTabByName(data);
+    })
+  }
 
-   private resetTemplateFactory() {
+  private resetTemplateFactory() {
     this.templateLazy = [
-      { selector: ComponentSelectors.DetailTramComponent, hiddenValue: true, selectorName: 'Detalle Tramite', modulePath: 'src/app/procesos/acn.module#AcnModule' },
-      { selector: ComponentSelectors.ManteComponent, hiddenValue: true, selectorName: 'Mantenimiento', modulePath: 'src/app/mantenimiento/mantenimiento.module#MantenimientoModule' },
-      { selector: ComponentSelectors.BusqDetailComponent, hiddenValue: true, selectorName: 'Detalle Busqueda', modulePath: 'src/app/procesos/acn.module#AcnModule' }
+      {
+        selector: ComponentSelectors.DetailTramComponent, hiddenValue: true,
+        selectorName: 'Detalle Tramite',
+        modulePath: 'src/app/procesos/acn.module#AcnModule'
+      },
+      {
+        selector: ComponentSelectors.ManteComponent, hiddenValue: true,
+        selectorName: 'Mantenimiento',
+        modulePath: 'src/app/mantenimiento/mantenimiento.module#MantenimientoModule',
+        haveParams: true
+      },
+      {
+        selector: ComponentSelectors.BusqDetailComponent, hiddenValue: true,
+        selectorName: 'Detalle Busqueda',
+        modulePath: 'src/app/procesos/acn.module#AcnModule'
+      },
+      {
+        selector: ComponentSelectors.dashBoardComponent, hiddenValue: true,
+        selectorName: 'Dashboard',
+        modulePath: 'src/app/header/dashboard-component/dashboard-component.module#DashboardModuleModule',
+        haveParams: true
+      }
     ];
   }
 
-
+  dataOutput(name: any) {
+    this.selectorNameC = name;
+    this.loadADynamic(this.selectorNameC);
+  }
+  
+  reportes(){ console.log('reportes');}
 
   onLogout() {
     this.authService.logout();
   }
-  procesos(){
-   this.router.navigateByUrl('/procesos');
 
-  }
-
-  mantenimientos(){
-    this.router.navigateByUrl('/mantenimiento');
-  }
-
-  reportes(){
-    this.router.navigateByUrl('/');
-  }
-
-  consultar(){
-    this.router.navigateByUrl('/procesos/detalleBusqueda');
+  ngOnInit() {
+    this.loadADynamic('Dashboard');
   }
 
   loadADynamic(nameComponent: any) {
+    this.selectorNameC = nameComponent;
     var templateAux: tabTemplate = null;
 
     if (this.templateLazy.length === 0) {
@@ -75,13 +100,13 @@ export class HeaderComponent {
     }
 
     this.templateLazy.forEach(element => {
-      if (element.selectorName === nameComponent) {
+      if (element.selectorName === this.selectorNameC) {
         templateAux = element;
       }
     });
 
     if (templateAux === null) {
-      alert('Vista no creada: ' + nameComponent);
+      alert('Vista no creada: ' + this.selectorNameC);
     } else {
       this.createdLoadComponent(templateAux);
     }
@@ -101,25 +126,24 @@ export class HeaderComponent {
 
   private createdLoadComponent(element: tabTemplate): any {
     const local: tabClass = {};
+    //var localParams :any = null;
     if (this.queryListComponent.length === 0) {
-      this.createComponentFactory(element).then(() => {
-        this.collection = document.getElementById('containerAll').children;
-        local.active = true;
-        local.isCloseable = true;
-        local.name = element.selectorName;
-        local.visible = true;
-        this.queryListComponent.push(local);
-        this.templateLazy.forEach(elemento => {
-          if (element === elemento) {
-            elemento.position = 0;
-          }
+      if (element.haveParams) {
+        this.createComponentFactory2(element, this.dataInput).then(() => {
+          this.collection = document.getElementById('containerAll').children;
+          local.active = true;
+          local.isCloseable = true;
+          local.name = element.selectorName;
+          local.visible = true;
+          this.queryListComponent.push(local);
+          this.templateLazy.forEach(elemento => {
+            if (element === elemento) {
+              elemento.position = 0;
+            }
+          });
+          this.refreshRouting();
         });
-        this.refreshRouting();
-      });
-    } else if (this.queryListComponent.length > 0) {
-      if (this.existTab(element) && this.existCollectionTab(element)) {
-        console.log('elemento ya creado: ' + element.selectorName);
-        this.setCollectionVisibleItems(element);
+        console.log(this.selectorNameC);
       } else {
         this.createComponentFactory(element).then(() => {
           this.collection = document.getElementById('containerAll').children;
@@ -130,23 +154,83 @@ export class HeaderComponent {
           this.queryListComponent.push(local);
           this.templateLazy.forEach(elemento => {
             if (element === elemento) {
-              elemento.position = this.queryListComponent.length - 1;
-              this.setCollectionVisibleItems(elemento);
+              elemento.position = 0;
             }
           });
+          console.log(this.collection);
           this.refreshRouting();
         });
       }
+
+    } else if (this.queryListComponent.length > 0) {
+      if (this.existTab(element) && this.existCollectionTab(element)) {
+        console.log('elemento ya creado: ' + element.selectorName);
+        this.setCollectionVisibleItems(element);
+      } else {
+        if (element.haveParams) {
+          this.createComponentFactory2(element, this.dataInput).then(() => {
+            this.collection = document.getElementById('containerAll').children;
+            local.active = true;
+            local.isCloseable = true;
+            local.name = element.selectorName;
+            local.visible = true;
+            this.queryListComponent.push(local);
+            this.templateLazy.forEach(elemento => {
+              if (element === elemento) {
+                elemento.position = this.queryListComponent.length - 1;
+                this.setCollectionVisibleItems(elemento);
+              }
+            });
+            this.refreshRouting();
+          });
+
+        } else {
+          this.createComponentFactory(element).then(() => {
+            this.collection = document.getElementById('containerAll').children;
+            local.active = true;
+            local.isCloseable = true;
+            local.name = element.selectorName;
+            local.visible = true;
+            this.queryListComponent.push(local);
+            this.templateLazy.forEach(elemento => {
+              if (element === elemento) {
+                elemento.position = this.queryListComponent.length - 1;
+                this.setCollectionVisibleItems(elemento);
+              }
+            });
+            this.refreshRouting();
+          });
+
+        }
+
+      }
     }
-    //console.log(this.templateLazy);
   }
 
+  /**
+   * Create dynamic component without params
+   * @param element 
+   */
   private createComponentFactory(element: tabTemplate): Promise<void> {
     return this.dynamicComponentSvc.createComponent({
       modulePath: element.modulePath,
       selectorName: element.selector,
       outlet: this.containerTemplate
     });
+  }
+
+  /**
+   * Create dynamic component with params
+   * @param element 
+   * @param paramsIn 
+   * @param paramsOut 
+   */
+  private createComponentFactory2(element: tabTemplate, paramsIn: any): Promise<void> {
+    return this.dynamicComponentSvc.createComponentParams({
+      modulePath: element.modulePath,
+      selectorName: element.selector,
+      outlet: this.containerTemplate
+    }, paramsIn);
   }
 
   private setCollectionVisibleItems(elemento: tabTemplate): any {
@@ -211,6 +295,23 @@ export class HeaderComponent {
     }
   }
 
+  private closeTabByName(name: string) {
+    var local: tabClass = null;
+    this.queryListComponent.forEach(element => {
+      if (element.name === name) {
+        local = element;
+      }
+    });
+
+    if (local === null) {
+      console.log('Tab not found');
+    } else {
+      this.closeDynamicTab(local);
+    }
+  }
+
+
+
   closeDynamicTab(tab: tabClass) {
     //console.log(tab);
     var localtemplateCol: tabTemplate[] = [];
@@ -229,7 +330,6 @@ export class HeaderComponent {
           }
         });
       }
-
       /*console.log('----------------------------------')
       console.log(this.collection);
       console.log(localtemplateCol);*/
@@ -242,6 +342,5 @@ export class HeaderComponent {
     }, 10);
 
   }
-
 
 }

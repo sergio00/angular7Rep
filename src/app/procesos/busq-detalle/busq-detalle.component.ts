@@ -1,4 +1,3 @@
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDetalleComponent } from './modal-detalle/modal-detalle.component';
 import { ConfirmationDialogService } from './../../config/custom/confirmation-dialog/confirmation-dialog.service';
 import { cbtn, Botones } from './../../config/custom/cc-panel-buttons/buttons.componente';
@@ -22,10 +21,7 @@ export class BusqDetalleComponent implements OnInit {
   control: any;
 
 
-  constructor(private router: Router, public botones: Botones, private confirmationDialogService: ConfirmationDialogService,
-    private modalService: NgbModal
-
-  ) {
+  constructor(private router: Router, public botones: Botones, private confirmationDialogService: ConfirmationDialogService) {
 
     this.control = BusqDetalleComponent.prototype;
     console.log(this.control);
@@ -143,7 +139,7 @@ export class BusqDetalleComponent implements OnInit {
     const modalRef = modal.v1.open(ModalDetalleComponent);
     modalRef.componentInstance.title = 'About';
     modalRef.result.then(
-      res => { /*console.log("Resulatdo Modal:" + res)*/ }
+      res => { console.log("Resulatdo Modal:" + res) }
     ).catch(
       resultado => {
         console.log("Cerro Manual:" + resultado);
@@ -153,8 +149,7 @@ export class BusqDetalleComponent implements OnInit {
   }
     /* Abrir un Componente Modal */
   public openModal2(modal:any) {
-      console.log(modal.v1);
-      
+      //console.log(modal.v1);      
       modal.v1.open2(ModalMaterialDialogExampleComponent,{},'About');
   
     }
@@ -164,16 +159,14 @@ export class BusqDetalleComponent implements OnInit {
 
     confirmDialog.v1.confirm('Pregunta', 'Esta seguro de eliminar el registro.?')
       .then(
-        (confirmed) => console.log('Opcion:', confirmed)
+        (confirmed) => console.log('Opcion Seleccionada:', confirmed)
       )
-      .catch(() => console.log('Cancelo la Ventana'));
+      .catch(() => console.log('Cancelo la Ventana de Pregunta'));
   }
 
 
   abrirModalJquery() {
-
     $("#ModaldePruebas").modal("show");
-
   }
 
 }

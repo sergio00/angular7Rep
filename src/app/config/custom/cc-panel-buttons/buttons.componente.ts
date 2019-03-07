@@ -25,10 +25,6 @@ export class Botones {
         this.name1=Botones.prototype;
      }
 
-/*
-{orig:"vistasExcep",accion:$scope.hsdiv,paramAccion:false,
-cbtn:{icon:"glyphicon glyphicon-remove",texto:"Cerrar Vista"},permiso:true,showtxt:true,showimg:true,showbadge:false}
- */
     public getBotones() {
          this.todos = [
             {

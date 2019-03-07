@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
-import { MatPaginatorIntl, MatDialogModule, MatPaginatorModule, MatRippleModule, MatDividerModule } from '@angular/material';
+import { MatPaginatorIntl, MatDialogModule, MatPaginatorModule, MatRippleModule, MatDividerModule, MatMenuModule, MatGridListModule } from '@angular/material';
 import { CustomMatPaginatorIntl } from './custom-paginator-intl';
 @NgModule({
   exports: [
@@ -25,7 +25,9 @@ import { CustomMatPaginatorIntl } from './custom-paginator-intl';
     MatSnackBarModule,
     MatTabsModule,
     MatRippleModule,
-    MatDividerModule
+    MatDividerModule,
+    MatMenuModule,
+    MatGridListModule
   ],
   providers: [{provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl}]
 })

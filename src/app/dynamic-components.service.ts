@@ -3,6 +3,13 @@ import { ComponentSelectors } from "./component-selectors";
 
 @Injectable()
 export class DynamicComponentsService {
+    private _localOut: any = null;
+    public get localOut(): any {
+        return this._localOut;
+    }
+    public set localOut(value: any) {
+        this._localOut = value;
+    }
 
     constructor(
         private loader: NgModuleFactoryLoader,
@@ -36,6 +43,30 @@ export class DynamicComponentsService {
     }
 
     /**
+    * Dynamically create an Angular component using an NgModuleFactoryLoader
+    * @param request Contains the info required to dynamically load an Angular component
+    * @param params Contains the params required to dynamically load an Angular component
+    */
+    public createComponentParams(request: CreateComponentRequest, paramsIn: any): Promise<void> {
+        return this.loader
+            .load(request.modulePath)
+            .then((moduleFactory) => {
+                const componentFactoryResolver = moduleFactory.create(this.injector).componentFactoryResolver;
+                const factoryClass = this.getFactoryClass(componentFactoryResolver, request.selectorName);
+                if (!factoryClass) throw new Error(`Unrecognized component name: ${request.selectorName}`);
+                const componentFactory = componentFactoryResolver.resolveComponentFactory(factoryClass);
+                const componentRef = request.outlet.createComponent(componentFactory, request.index, this.injector);
+                if (paramsIn != undefined && paramsIn != null) {
+                    componentRef.instance.dataInput = paramsIn;
+                }
+                this.openComponents.set(componentRef, request);
+            })
+            .catch(err => {
+                throw err;
+            });
+    }
+
+    /**
     * Given an ComponentFactoryResolver, returns the Type that has the given selector.  
     * We use selectors to find the component because those don't get changed during optimization/minification
     * @param componentFactoryResolver A ComponentFactoryResolver for a given module
@@ -54,7 +85,7 @@ export class DynamicComponentsService {
     public reloadComponents(componentTypes: Array<Type<any>>) {
         //get an array of componentRefs that should be reloaded
         let componentsToReload = Array.from(this.openComponents.keys()).
-                                filter(c => componentTypes.some(t => c.instance instanceof t));
+            filter(c => componentTypes.some(t => c.instance instanceof t));
         let reloadRequests = new Array<CreateComponentRequest>();
 
         //build the list of reload requests
