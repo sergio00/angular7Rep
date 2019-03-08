@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
-import { tabClass } from './header.component';
 import { Subject } from 'rxjs';
 
 @Injectable()
 export class SharedDataComponentService {
-
-  private tabsClass: tabClass[] = [];
 
   constructor() { }
 

@@ -30,13 +30,13 @@ export class DatosUsuarioComponent implements OnInit {
     this.setConsulta='GitApiQuery';
   }
 
-  ngOnInit() {
-    this.title = this.dataInput.name;
-    console.log(this.dataInput.name);
+  ngOnInit() {//data.title
+    this.title = this.dataInput.datos.name;
+    console.log(this.dataInput.datos.name);
   }
 
   closeComponentTab(){
-    this.shareData.callCloseComponent(this.title);
+    this.shareData.callCloseComponent(this.dataInput.title);
   }
   
   refreshData(list:any){

@@ -39,14 +39,17 @@ export class HeaderComponent implements OnInit {
     private shareData: SharedDataComponentService, private dynamicComponentSvc: DynamicComponentsService) {
     this.resetTemplateFactory();
     this.shareData.componentMethodCalled$.subscribe((data) => {
-      console.log(data.datos);
+      console.log(data);
       this.selectorNameC = data.title ;
-      this.dataInput=data.datos;
+      this.dataInput=data;
       this.loadADynamic(this.selectorNameC);
     });
     this.shareData.componentMethodCalled2$.subscribe((data) => {
       this.closeTabByName(data);
-    })
+    });
+  }
+  reportes(){
+    console.log('reportes g');
   }
 
   private resetTemplateFactory() {
@@ -80,8 +83,6 @@ export class HeaderComponent implements OnInit {
     this.selectorNameC = name;
     this.loadADynamic(this.selectorNameC);
   }
-  
-  reportes(){ console.log('reportes');}
 
   onLogout() {
     this.authService.logout();

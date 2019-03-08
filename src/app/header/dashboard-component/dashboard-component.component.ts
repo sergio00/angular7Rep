@@ -28,7 +28,9 @@ export class DashboardComponentComponent implements OnInit {
     }
     this.shareData.callCreateComponent(userData);
   }
+
   reportes(){
-	console.log('reportes');
-	}
+    console.log('reportes g');
+  }
+
 }
