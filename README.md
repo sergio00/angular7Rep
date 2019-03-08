@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
 
-##Resume
+## Resume
 This project has lazy load component with dynamics components. 
 Share data between dynamics components.
 
