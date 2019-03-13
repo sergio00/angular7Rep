@@ -19,6 +19,8 @@ export class PaginatorComponent implements OnInit {
   @Input() pageSize:number;
   @Input() showOption:any;
   @Input() dataSourceP:string;
+  @Input() dataInput:any;
+  
 
   @Output() refreshData: EventEmitter<any> = new EventEmitter<any>();
 
@@ -53,6 +55,8 @@ export class PaginatorComponent implements OnInit {
       this.loadData();
 
     }, 10);  
+    console.log('data input:');
+    console.log(this.dataInput);
   }
 
   refreshDataB(say: any) {
@@ -106,6 +110,7 @@ export class PaginatorComponent implements OnInit {
               case 'GitApiQuery':
                 return this.exampleDatabase!.getRepoIssues("created", "desc", this.indexQuery, this.resultQuery);
                 break;
+
               default:
                 alert('No se ha ingresado del tipo de Consulta');
             }
