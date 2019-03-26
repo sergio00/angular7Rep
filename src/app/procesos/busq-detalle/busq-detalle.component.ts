@@ -149,7 +149,7 @@ export class BusqDetalleComponent implements OnInit {
   }
 
   /* Abrir un Componente Modal */
-  public openModal3(modal: any) {
+  public openModal3() {
     //console.log(modal.v1);      
     const datosModal = this.confirmationDialogService.open2(ModalMaterialDialogExampleComponent, {}, 'About');
 

@@ -1,3 +1,7 @@
+import { NgSelectModule } from '@ng-select/ng-select';
+import { DateTimePickerComponent } from './date-time-picker/date-time-picker.component';
+import { CcInputGroupPrepend } from './cc-input-group-prepend.component';
+import { SortPipe } from './pipe/sort.pipe';
 import { CcModalComponent } from './cc-modal.component';
 import { ModalDialogService } from './modal/modal-dialog.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -26,15 +30,19 @@ import { CcSpinerProcesarComponent } from './cc-spiner-procesar.component';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { FormsModule } from '@angular/forms';
 import { AppMaterialModule } from '../app-material/app-material.module';
+import { FilterPipe } from './pipe/filter.pipe';
 
 @NgModule({
   declarations: [
     CcPanelComponent,
     CcPanelGroupComponent,
     CcButtonsComponent,
+    CcInputGroupPrepend,
     ButtonRadioActiveComponent,
     CcPanelCollapseComponent,
     FilterByOriginPipe,
+    DateTimePickerComponent,
+    SortPipe,
     CdClickDirective,
     CdEnterDirective,
     CdFuncionDirective,
@@ -45,9 +53,8 @@ import { AppMaterialModule } from '../app-material/app-material.module';
     ConfirmationDialogComponent,
     CcSpinerProcesarComponent,
     CcModalComponent,
-    PaginatorComponent    
-    
-    
+    PaginatorComponent,
+    FilterPipe
   ],
   imports: [
     CommonModule,
@@ -55,13 +62,18 @@ import { AppMaterialModule } from '../app-material/app-material.module';
     NgxSpinnerModule,
     FormsModule,
     AppMaterialModule,
-    AtomSpinnerModule
+    AtomSpinnerModule,
+    NgSelectModule
   ],
   exports: [
     CcPanelComponent,
     CcPanelGroupComponent,
     CcButtonsComponent,
+    CcInputGroupPrepend,
     FilterByOriginPipe,
+    DateTimePickerComponent,
+    SortPipe,
+    FilterPipe,
     ButtonRadioActiveComponent,
     CcPanelCollapseComponent,
     CdClickDirective,
@@ -76,14 +88,14 @@ import { AppMaterialModule } from '../app-material/app-material.module';
     NgxSpinnerModule,
     CcSpinerProcesarComponent,
     CcModalComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    NgSelectModule
+    
     
   ],
   
-  providers: [Botones,NgbCollapse,
-    NgbActiveModal, ConfirmationDialogService,
-    ModalDialogService],
-  entryComponents: [ ConfirmationDialogComponent ],
+  providers: [Botones,NgbCollapse,NgbActiveModal, ConfirmationDialogService, ModalDialogService],
+  entryComponents: [ ConfirmationDialogComponent],
 
 })
 export class AppCustomModule {}

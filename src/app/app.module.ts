@@ -1,4 +1,4 @@
-import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModule, NgbDateParserFormatter, NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
 
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
@@ -13,6 +13,11 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NgModuleFactoryLoader, SystemJsNgModu
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
+import { DateTimeUtils } from './config/utils/date-time-utils';
+import { NgbDateCustomParserFormatter } from './config/utils/dateformat';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +51,9 @@ import { SharedDataComponentService } from './header/shared-data-component.servi
   providers: [
     {provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader},
     AuthService,DynamicComponentsService,SharedDataComponentService,
+	{ provide: MAT_DATE_LOCALE, useValue: 'es' },
+	{ provide: MAT_DATE_FORMATS, useValue: DateTimeUtils.MAT_CUSTOM_DATE_FORMATS },
+    {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter},
     AuthGuard,NgbModal],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
