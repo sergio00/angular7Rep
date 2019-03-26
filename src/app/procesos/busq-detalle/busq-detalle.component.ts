@@ -64,7 +64,7 @@ export class BusqDetalleComponent implements OnInit {
       },
       {
         orig: "aprobarRegla4",
-        accion: this.regresar , paramAccion: this.router,
+        accion: this.regresar, paramAccion: this.router,
         boton: { icon: "fa fa-undo", texto: "Regresar" },
         permiso: true,
         showtxt: true,
@@ -135,7 +135,7 @@ export class BusqDetalleComponent implements OnInit {
 
 
   /* Abrir un Componente Modal */
-  public openModal(modal:any) {
+  public openModal(modal: any) {
     const modalRef = modal.v1.open(ModalDetalleComponent);
     modalRef.componentInstance.title = 'About';
     modalRef.result.then(
@@ -147,15 +147,30 @@ export class BusqDetalleComponent implements OnInit {
     );
 
   }
-    /* Abrir un Componente Modal */
-  public openModal2(modal:any) {
-      //console.log(modal.v1);      
-      modal.v1.open2(ModalMaterialDialogExampleComponent,{},'About');
-  
-    }
+
+  /* Abrir un Componente Modal */
+  public openModal3(modal: any) {
+    //console.log(modal.v1);      
+    const datosModal = this.confirmationDialogService.open2(ModalMaterialDialogExampleComponent, {}, 'About');
+
+    datosModal.afterClosed().subscribe(result => {
+      console.log('Llamado desde el componente');
+      console.log(result);
+    });
+  }
+  /* Abrir un Componente Modal */
+  public openModal2(modal: any) {
+    //console.log(modal.v1);      
+    const datosModal = modal.v1.open2(ModalMaterialDialogExampleComponent, {}, 'About');
+
+    datosModal.afterClosed().subscribe(result => {
+      console.log('Llamado desde el componente');
+      console.log(result);
+    });
+  }
 
   /* Modal de Pregunta por medio de un servicio */
-  public openConfirmationDialog(confirmDialog:any) {
+  public openConfirmationDialog(confirmDialog: any) {
 
     confirmDialog.v1.confirm('Pregunta', 'Esta seguro de eliminar el registro.?')
       .then(

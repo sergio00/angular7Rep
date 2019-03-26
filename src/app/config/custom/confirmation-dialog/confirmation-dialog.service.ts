@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { NgbModalConfig, NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { ConfirmationDialogComponent } from './confirmation-dialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 interface BasicInputOptions {
   title: string;
@@ -53,14 +53,6 @@ export class ConfirmationDialogService {
     // Show modal and get reference object
     const modalRef = this.modalService.open(component, opts);
     modalRef.componentInstance.title = title;
-    modalRef.result.then(
-      res => { console.log("Resultado Modal:" + res) }
-    ).catch(
-      resultado => {
-        console.log("Cerro Manual:" + resultado);
-      }
-    );
-
     // Set modal content
     Object.keys(content).forEach(key => modalRef.componentInstance[key] = content[key]);
 
@@ -68,15 +60,13 @@ export class ConfirmationDialogService {
   }
   
 
-  open2(component: any, options: any = {}, title:string = 'ModalComponent') {
+  open2(component: any, options: any = {}, title:string = 'ModalComponent'):MatDialogRef<any> {
     const dialogRef = this.dialog.open(component, {
       width: '250px', height:'350px',
       data: {name: "this.name", animal: "this.animal"}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    return dialogRef;
   
   }
 }
